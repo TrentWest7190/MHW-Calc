@@ -155,9 +155,9 @@ class App extends Component {
             />
           ))}
           <div className="calc-results">
-            <h3>Final Weapon Attack</h3>
-            <p>True Raw: {Math.round(new BigNumber(this.state.finalValue).dividedBy(this.state.weaponType.value).toNumber())}</p>
-            <p>Game Raw: {Math.round(this.state.finalValue)}</p>
+            <h4>Final Weapon Attack</h4>
+            <span>True Raw: {Math.round(new BigNumber(this.state.finalValue).dividedBy(this.state.weaponType.value).toNumber())}</span>
+            <span>Game Raw: {Math.round(this.state.finalValue)}</span>
             <button onClick={this.handleSave}>Save For Comparison</button>
           </div>
         </div>

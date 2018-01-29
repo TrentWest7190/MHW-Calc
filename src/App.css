@@ -2,16 +2,31 @@
   width: 80%;
   margin: auto;
   display: grid;
-  grid-template-rows: 150px auto;
-  grid-template-columns: 50% 50%;
-  grid-template-areas:
-    "header header"
-    "calc save-table";
+  grid-template-rows: 80px 800px auto;
+  grid-template-columns: 100%;
+  grid-template-areas: 
+    "header"
+    "calc"
+    "save-table";
+  
+}
+
+@media (min-width: 750px) {
+  .App {
+    grid-template-rows: 60px 800px auto;
+    grid-template-columns: 50% 50%;
+    grid-template-areas:
+      "header header"
+      "calc save-table"
+      "calc save-table";
+  }
 }
 
 .app-header {
   grid-area: header;
   text-align: center;
+  font-size: 1.5em;
+  margin-bottom: 10px;
 }
 
 .save-table {
@@ -26,6 +41,7 @@
 .save-table > table {
   width: 100%;
   text-align: center;
+  font-size: .8em;
 }
 
 .save-table-body tr:nth-child(odd){
@@ -48,11 +64,23 @@
 }
 
 .calc > label {
-  margin: 10px;
+  margin: 5px;
   display: flex;
   flex-direction: column;
 }
 
 .calc-results {
   text-align: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.calc-results h4 {
+  margin: 0;
+}
+
+.calc-results button {
+  width: 200px;
+  height: 50px;
+  margin: auto;
 }
