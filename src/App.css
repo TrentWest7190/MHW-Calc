@@ -1,11 +1,21 @@
 .App {
+  width: 80%;
+  margin: auto;
+  display: grid;
+  grid-template-rows: 150px auto;
+  grid-template-columns: 50% 50%;
+  grid-template-areas:
+    "header header"
+    "calc save-table";
+}
+
+.app-header {
+  grid-area: header;
   text-align: center;
 }
 
 .save-table {
-  display: flex;
-  justify-content: center;
-  margin-top: 50px;
+  grid-area: save-table;
 }
 
 .save-table-skill-cell {
@@ -14,15 +24,35 @@
 }
 
 .save-table > table {
-  width: 80%;
+  width: 100%;
+  text-align: center;
 }
 
 .save-table-body tr:nth-child(odd){
   background-color: lightblue;
 }
 
-.calc > label {
-  margin: 5px;
+.calc {
+  grid-area: calc;
   display: flex;
   flex-direction: column;
+  font-size: 1.5em;
+}
+
+.calc select {
+  font-size: 1em;
+}
+
+.calc input {
+  font-size: 1em;
+}
+
+.calc > label {
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.calc-results {
+  text-align: center;
 }

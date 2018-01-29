@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { weaponTypes, sharpness } from './weaponData';
-import { attackBoost, criticalEye } from './skillData';
 import { BigNumber } from 'bignumber.js';
+import SkillSelect from './SkillSelect';
 import './App.css';
 
 class App extends Component {
-  constructor () {
-    super()
+  constructor (props) {
+    super(props)
     this.state = {
       savedWeapons: [],
       weaponAttack: 0,
@@ -28,6 +28,14 @@ class App extends Component {
         level: 0,
         affinity: 0
       },
+      weaknessExploit: {
+        level: 0,
+        affinity: 0
+      },
+      heroics: {
+        level: 0,
+        attackMulti: 0
+      },
       trueValue: 0,
       finalValue: 0
     }
@@ -36,6 +44,8 @@ class App extends Component {
     this.handleWeaponSharpness = this.handleSelectChange('weaponSharpness').bind(this)
     this.handleAttackBoost = this.handleSelectChange('attackBoost').bind(this)
     this.handleCriticalEye = this.handleSelectChange('criticalEye').bind(this)
+    this.handleWeaknessExploit = this.handleSelectChange('weaknessExploit').bind(this)
+    this.handleHeroics = this.handleSelectChange('heroics').bind(this)
 
     this.handleWeaponAttack = this.handleInputChange('weaponAttack').bind(this)
     this.handleWeaponAffinity = this.handleInputChange('weaponAffinity').bind(this)
@@ -93,9 +103,11 @@ class App extends Component {
 
   calculateFinalValue (state) {
     const trueRaw = new BigNumber(state.weaponAttack).dividedBy(state.weaponType.value)
-    const finalAttack = trueRaw.plus(state.attackBoost.attack)
+    const attackBoostedRaw = trueRaw.plus(state.attackBoost.attack)
+    const heroicAttack = trueRaw.multipliedBy(state.heroics.attackMulti)
+    const finalAttack = attackBoostedRaw.plus(heroicAttack)
     const affinityAsAPercent = new BigNumber(state.weaponAffinity).dividedBy(100)
-    const finalAffinity = new BigNumber(state.attackBoost.affinity).plus(state.criticalEye.affinity).plus(affinityAsAPercent)
+    const finalAffinity = new BigNumber(state.attackBoost.affinity).plus(state.criticalEye.affinity).plus(state.weaknessExploit.affinity).plus(affinityAsAPercent)
     const absoluteAffinity = finalAffinity.abs()
     const nonAffinity = new BigNumber(1).minus(absoluteAffinity)
     const affinityMultiplier = finalAffinity > 0 ? new BigNumber(1.25) : new BigNumber(.75)
@@ -109,9 +121,10 @@ class App extends Component {
   }
 
   render() {
+    console.log(this.props)
     return (
       <div className="App">
-        <h1>Monster Hunter World Damage Calculator</h1>
+        <h1 className="app-header">Monster Hunter World Damage Calculator</h1>
         <div className="calc" style={{ display: 'flex', justifyContent: 'center'}}>
           <label>
             Weapon Type:
@@ -133,23 +146,21 @@ class App extends Component {
           <label>
             Weapon Affinity:<input onChange={this.handleWeaponAffinity} type="number"/>
           </label>
-          <label>
-            Attack Boost:
-            <select onChange={this.handleAttackBoost}>
-              { attackBoost.map(atk => (<option data-value={JSON.stringify(atk)} key={atk.level}>Lv {atk.level}</option>))}
-            </select>
-          </label>
-          <label>
-            Critical Eye:
-            <select onChange={this.handleCriticalEye}>
-              { criticalEye.map(crit => (<option data-value={JSON.stringify(crit)} key={crit.level}>Lv {crit.level}</option>))}
-            </select>
-          </label>
+          {Object.keys(this.props.skillData).map((skillName) => (
+            <SkillSelect
+              key={skillName}
+              handleChange={this.handleSelectChange(skillName)}
+              skillData={this.props.skillData[skillName]}
+            />
+          ))}
+          <div className="calc-results">
+            <h3>Final Weapon Attack</h3>
+            <p>True Raw: {Math.round(new BigNumber(this.state.finalValue).dividedBy(this.state.weaponType.value).toNumber())}</p>
+            <p>Game Raw: {Math.round(this.state.finalValue)}</p>
+            <button onClick={this.handleSave}>Save For Comparison</button>
+          </div>
         </div>
-        <h3>Final Weapon Attack</h3>
-        <p>True Raw: {Math.round(new BigNumber(this.state.finalValue).dividedBy(this.state.weaponType.value).toNumber())}</p>
-        <p>Game Raw: {Math.round(this.state.finalValue)}</p>
-        <button onClick={this.handleSave}>Save For Comparison</button>
+        
         <div className="save-table">
           <table>
             <thead>
