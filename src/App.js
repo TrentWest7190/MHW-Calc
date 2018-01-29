@@ -123,7 +123,6 @@ class App extends Component {
   }
 
   render() {
-    console.log(this.props)
     return (
       <div className="App">
         <h1 className="app-header">Monster Hunter World Damage Calculator</h1>
