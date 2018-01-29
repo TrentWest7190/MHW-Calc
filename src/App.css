@@ -1,0 +1,28 @@
+.App {
+  text-align: center;
+}
+
+.save-table {
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+}
+
+.save-table-skill-cell {
+  display: flex;
+  flex-direction: column;
+}
+
+.save-table > table {
+  width: 80%;
+}
+
+.save-table-body tr:nth-child(odd){
+  background-color: lightblue;
+}
+
+.calc > label {
+  margin: 5px;
+  display: flex;
+  flex-direction: column;
+}
