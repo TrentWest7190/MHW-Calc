@@ -85,7 +85,9 @@ class App extends Component {
       gameRaw: Math.round(this.state.finalValue),
       skills: {
         attack: this.state.attackBoost.level,
-        critEye: this.state.criticalEye.level
+        critEye: this.state.criticalEye.level,
+        heroics: this.state.heroics.level,
+        weaknessExploit: this.state.weaknessExploit.level
       }
     }
     this.setState((state) => ({
@@ -183,6 +185,8 @@ class App extends Component {
                   <td className="save-table-skill-cell">
                     <span>Attack: Lv {weapon.skills.attack}</span>
                     <span>Critical Eye: Lv {weapon.skills.critEye}</span>
+                    <span>Heroics: Lv {weapon.skills.heroics}</span>
+                    <span>Weakness Exploit: Lv {weapon.skills.weaknessExploit}</span>
                   </td>
                   <td>
                     <button onClick={this.deleteSavedWeapon(i)}>X</button>
