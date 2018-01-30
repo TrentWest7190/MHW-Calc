@@ -28,6 +28,10 @@ export const weaponTypes = [
     value: 3.3
   },
   {
+    name: 'Insect Glaive',
+    value: 3.1
+  },
+  {
     name: 'Lance / Gun Lance',
     value: 2.3
   },
