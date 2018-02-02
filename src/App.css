@@ -1,58 +1,11 @@
-.App {
-  width: 80%;
-  margin: auto;
+.app {
+  margin-left: 100px;
+  margin-right: 100px;
+  margin-top: 30px;
   display: grid;
-  grid-template-rows: 150px auto;
-  grid-template-columns: 50% 50%;
-  grid-template-areas:
-    "header header"
-    "calc save-table";
-}
-
-.app-header {
-  grid-area: header;
-  text-align: center;
-}
-
-.save-table {
-  grid-area: save-table;
-}
-
-.save-table-skill-cell {
-  display: flex;
-  flex-direction: column;
-}
-
-.save-table > table {
-  width: 100%;
-  text-align: center;
-}
-
-.save-table-body tr:nth-child(odd){
-  background-color: lightblue;
-}
-
-.calc {
-  grid-area: calc;
-  display: flex;
-  flex-direction: column;
-  font-size: 1.5em;
-}
-
-.calc select {
-  font-size: 1em;
-}
-
-.calc input {
-  font-size: 1em;
-}
-
-.calc > label {
-  margin: 10px;
-  display: flex;
-  flex-direction: column;
-}
-
-.calc-results {
-  text-align: center;
-}
+  grid-template-columns: 60% 40%;
+  grid-gap: 20px; }
+  .app-container {
+    border: 3px black solid;
+    border-radius: 10px;
+    padding: 10px; }

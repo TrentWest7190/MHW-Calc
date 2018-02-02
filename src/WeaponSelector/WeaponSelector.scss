@@ -1,0 +1,22 @@
+.weapon-selector {
+    display: grid;
+    grid-template-columns: 1fr 2.5fr;
+
+    &-class-buttons {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    &-button {
+        margin: 3px;
+        height: 50px;
+        width: 50px;
+        background-color: white;
+        border: 2px black solid;
+        border-radius: 3px;
+        &-img {
+            height: 36px;
+            width: 36px;
+        }
+    }
+}

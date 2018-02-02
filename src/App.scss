@@ -1,0 +1,14 @@
+.app {
+    margin-left: 100px;
+    margin-right: 100px;
+    margin-top: 30px;
+    display: grid;
+    grid-template-columns: 60% 40%;
+    grid-gap: 20px;
+
+    &-container {
+        border: 3px black solid;
+        border-radius: 10px;
+        padding: 10px;
+    }
+}

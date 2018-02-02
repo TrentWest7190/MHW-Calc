@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { weaponTypes, sharpness } from './weaponData';
 import { BigNumber } from 'bignumber.js';
 import SkillSelect from './SkillSelect';
+import WeaponSelector from './WeaponSelector/WeaponSelector';
 import './App.css';
 
 class App extends Component {
@@ -124,78 +125,13 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
-        <h1 className="app-header">Monster Hunter World Damage Calculator</h1>
-        <div className="calc" style={{ display: 'flex', justifyContent: 'center'}}>
-          <label>
-            Weapon Type:
-            <select onChange={this.handleWeaponType}>
-              { weaponTypes.map(type => (<option data-value={JSON.stringify(type)} key={type.name}>{type.name}</option>)) }
-            </select>
-            Class Multiplier: {this.state.weaponType.value}
-          </label>
-          <label>
-            Weapon sharpness:
-            <select onChange={this.handleWeaponSharpness}>
-              { sharpness.map(sharp => (<option data-value={JSON.stringify(sharp)} key={sharp.name}>{sharp.name}</option>)) }
-            </select>
-            Sharpness Multiplier: {this.state.weaponSharpness.value}
-          </label>
-          <label>
-            Weapon Attack:<input onChange={this.handleWeaponAttack} type="number"/>
-          </label>
-          <label>
-            Weapon Affinity:<input onChange={this.handleWeaponAffinity} type="number"/>
-          </label>
-          {Object.keys(this.props.skillData).map((skillName) => (
-            <SkillSelect
-              key={skillName}
-              handleChange={this.handleSelectChange(skillName)}
-              skillData={this.props.skillData[skillName]}
-            />
-          ))}
-          <div className="calc-results">
-            <h3>Final Weapon Attack</h3>
-            <p>True Raw: {Math.round(new BigNumber(this.state.finalValue).dividedBy(this.state.weaponType.value).toNumber())}</p>
-            <p>Game Raw: {Math.round(this.state.finalValue)}</p>
-            <button onClick={this.handleSave}>Save For Comparison</button>
-          </div>
+      <div className="app">
+        <div className="app-container">
+          <WeaponSelector></WeaponSelector>
         </div>
         
-        <div className="save-table">
-          <table>
-            <thead>
-              <tr>
-                <th>Desc</th>
-                <th>Weapon Type</th>
-                <th>True Raw</th>
-                <th>Game Raw</th>
-                <th>Skills</th>
-                <th>Delete</th>
-              </tr>
-            </thead>
-            <tbody className="save-table-body">
-              {this.state.savedWeapons.map((weapon, i) => (
-                <tr key={i} className="save-table-row">
-                  <td><input/></td>
-                  <td>{weapon.type}</td>
-                  <td>{weapon.trueRaw}</td>
-                  <td>{weapon.gameRaw}</td>
-                  <td className="save-table-skill-cell">
-                    <span>Attack: Lv {weapon.skills.attack}</span>
-                    <span>Critical Eye: Lv {weapon.skills.critEye}</span>
-                    <span>Heroics: Lv {weapon.skills.heroics}</span>
-                    <span>Weakness Exploit: Lv {weapon.skills.weaknessExploit}</span>
-                  </td>
-                  <td>
-                    <button onClick={this.deleteSavedWeapon(i)}>X</button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
       </div>
+      
     );
   }
 }
