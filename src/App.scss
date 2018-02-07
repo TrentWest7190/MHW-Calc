@@ -1,9 +1,18 @@
+body {
+    height: 100vh
+}
+
 .app {
-    margin-left: 100px;
-    margin-right: 100px;
-    margin-top: 30px;
+    padding-left: 100px;
+    padding-right: 100px;
+    padding-top: 30px;
     display: grid;
     grid-template-columns: 60% 40%;
+    grid-template-rows: 1fr 1fr 4fr;
+    grid-template-areas: 
+        "weaponSelect modifierSelect"
+        "damageOutput modifierSelect"
+        "weaponCompare modifierSelect";
     grid-gap: 20px;
 
     &-container {

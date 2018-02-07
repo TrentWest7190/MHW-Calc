@@ -3,6 +3,7 @@ import { weaponTypes, sharpness } from './weaponData';
 import { BigNumber } from 'bignumber.js';
 import SkillSelect from './SkillSelect';
 import WeaponSelector from './WeaponSelector/WeaponSelector';
+import ModifierSelector from './ModifierSelector/ModifierSelector';
 import './App.css';
 
 class App extends Component {
@@ -128,6 +129,9 @@ class App extends Component {
       <div className="app">
         <div className="app-container">
           <WeaponSelector></WeaponSelector>
+        </div>
+        <div className="app-container">
+          <ModifierSelector></ModifierSelector>
         </div>
         
       </div>
